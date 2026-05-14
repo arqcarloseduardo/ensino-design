@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundamentos do Design Gráfico</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1A1E3C;
+    --navy2:  #252A52;
+    --navy3:  #2E3460;
+    --coral:  #F4623A;
+    --teal:   #4ECDC4;
+    --yellow: #FFD166;
+    --violet: #9B5DE5;
+    --green:  #06D6A0;
+    --white:  #FFFFFF;
+    --light:  #CCD6F6;
+    --slate:  #8892B0;
+    --bg:     #F4F5FA;
+    --border: #E0E4F0;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 16px;
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  h2.section-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+    max-width: 620px;
+    margin-bottom: 48px;
+  }
+  h2.section-heading.light { color: var(--white); }
+
+  /* ── NAV DOTS ── */
+  .nav-dots {
+    position: fixed;
+    right: 28px; top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--slate);
+    opacity: 0.35;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none; padding: 0;
+  }
+  .nav-dot.active, .nav-dot:hover {
+    background: var(--coral);
+    opacity: 1;
+    transform: scale(1.35);
+  }
+
+  .section-divider { height: 1px; background: var(--border); margin: 0 64px; }
+
+  /* ══ 1. HERO ══ */
+  .hero {
+    background: var(--navy);
+    padding: 80px 64px 100px;
+    position: relative;
+    overflow: hidden;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 55% 70% at 85% 50%, #F4623A1A 0%, transparent 65%);
+  }
+  .hero-accent { position: absolute; left:0;top:0;bottom:0; width:6px; background:var(--coral); }
+  .hero-geo {
+    position: absolute; right:-60px; top:-60px;
+    width:480px; height:480px; border-radius:50%;
+    border:1px solid rgba(244,98,58,0.15);
+  }
+  .hero-geo2 {
+    position: absolute; right:60px; top:60px;
+    width:320px; height:320px; border-radius:50%;
+    border:1px solid rgba(244,98,58,0.1);
+  }
+  .hero-pill {
+    display: inline-block;
+    background: var(--coral); color:#fff;
+    font-family:'Syne',sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:3px; text-transform:uppercase;
+    padding:7px 18px; border-radius:2px; margin-bottom:32px; position:relative;
+  }
+  .hero h1 {
+    font-family:'Syne',sans-serif;
+    font-size: clamp(44px,6vw,80px); font-weight:800;
+    color:var(--white); line-height:1.0;
+    max-width:700px; margin-bottom:24px; position:relative;
+  }
+  .hero h1 span { color:var(--coral); }
+  .hero-sub {
+    color:var(--light); font-size:18px; font-weight:300;
+    max-width:500px; line-height:1.75; position:relative;
+  }
+  .hero-scroll {
+    position:absolute; bottom:40px; left:64px;
+    display:flex; align-items:center; gap:12px;
+    color:var(--slate); font-size:12px;
+    font-family:'Syne',sans-serif; letter-spacing:2px; text-transform:uppercase;
+  }
+  .hero-scroll-line { width:48px; height:1px; background:var(--coral); }
+
+  /* ══ 2. O QUE É DESIGN ══ */
+  .what-section {
+    background: var(--white);
+    padding: 80px 64px;
+  }
+  .what-inner { max-width: 1000px; margin: 0 auto; }
+  .what-quote {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 52px 56px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .what-quote::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 32px;
+    font-family:'Syne',sans-serif;
+    font-size:200px; font-weight:800;
+    color:var(--coral); opacity:0.08; line-height:1;
+  }
+  .what-quote p {
+    font-family:'Syne',sans-serif;
+    font-size: clamp(20px,2.5vw,30px);
+    font-weight:700; color:var(--white); line-height:1.4;
+    position:relative;
+  }
+  .what-quote p span { color:var(--coral); }
+  .what-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .what-col {
+    background: var(--bg);
+    border-radius: 14px;
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+  }
+  .what-col-icon { font-size:32px; margin-bottom:16px; display:block; }
+  .what-col-title {
+    font-family:'Syne',sans-serif;
+    font-size:16px; font-weight:700; color:var(--navy); margin-bottom:10px;
+  }
+  .what-col-desc { font-size:14px; color:var(--slate); line-height:1.7; }
+
+  /* ══ 3. ELEMENTOS VISUAIS ══ */
+  .elements-section {
+    background: var(--navy);
+    padding: 80px 64px;
+    position: relative; overflow: hidden;
+  }
+  .elements-section::before {
+    content:'';
+    position:absolute; bottom:-100px; right:-100px;
+    width:400px; height:400px; border-radius:50%;
+    background: radial-gradient(circle,#4ECDC415,transparent 70%);
+  }
+  .elements-inner { max-width:1000px; margin:0 auto; }
+  .elements-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .element-card {
+    background: var(--navy2);
+    border-radius: 14px;
+    padding: 28px 20px;
+    border: 1px solid var(--navy3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+    text-align: center;
+  }
+  .element-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.3);
+  }
+  .element-icon { font-size:36px; margin-bottom:16px; display:block; }
+  .element-title {
+    font-family:'Syne',sans-serif;
+    font-size:14px; font-weight:700; color:var(--white); margin-bottom:8px;
+  }
+  .element-desc { font-size:12.5px; color:var(--light); line-height:1.6; }
+  .element-card.highlight { background: var(--coral); border-color: var(--coral); }
+  .element-card.highlight .element-title { color:var(--white); }
+  .element-card.highlight .element-desc { color:rgba(255,255,255,0.85); }
+
+  /* ══ 4. PRINCÍPIOS COMPOSIÇÃO ══ */
+  .composition-section {
+    padding: 80px 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .composition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .comp-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(26,30,60,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .comp-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(26,30,60,0.13);
+  }
+  .comp-bar { height: 5px; }
+  .comp-body { padding: 28px 24px; }
+  .comp-num {
+    font-family:'Syne',sans-serif;
+    font-size:36px; font-weight:800; color:var(--coral);
+    opacity:0.2; line-height:1; margin-bottom:12px;
+  }
+  .comp-title {
+    font-family:'Syne',sans-serif;
+    font-size:16px; font-weight:700; color:var(--navy); margin-bottom:8px;
+  }
+  .comp-desc { font-size:13.5px; color:var(--slate); line-height:1.7; }
+
+  /* ══ 5. TEORIA DAS CORES ══ */
+  .color-section {
+    background: var(--navy);
+    padding: 80px 64px;
+  }
+  .color-inner { max-width:1000px; margin:0 auto; }
+  .color-wheel-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 48px;
+  }
+  .color-palettes { display:flex; flex-direction:column; gap:20px; }
+  .palette-item {
+    background: var(--navy2);
+    border-radius:12px;
+    padding:20px 24px;
+    border:1px solid var(--navy3);
+  }
+  .palette-name {
+    font-family:'Syne',sans-serif;
+    font-size:13px; font-weight:700; color:var(--white); margin-bottom:12px;
+  }
+  .palette-swatches { display:flex; gap:8px; }
+  .swatch {
+    height:32px; border-radius:6px; flex:1;
+    transition: transform 0.2s;
+  }
+  .swatch:hover { transform: scaleY(1.2); }
+  .color-facts { display:flex; flex-direction:column; gap:16px; }
+  .color-fact {
+    display:flex; gap:16px; align-items:flex-start;
+  }
+  .color-fact-dot {
+    width:12px; height:12px; border-radius:50%;
+    flex-shrink:0; margin-top:4px;
+  }
+  .color-fact-text { font-size:14.5px; color:var(--light); line-height:1.6; }
+  .color-fact-text strong { color:var(--white); font-weight:600; }
+
+  /* ══ 6. TIPOGRAFIA ══ */
+  .typo-section {
+    background: var(--white);
+    padding: 80px 64px;
+  }
+  .typo-inner { max-width:1000px; margin:0 auto; }
+  .typo-families {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:16px;
+    margin-bottom: 40px;
+  }
+  .typo-fam {
+    background: var(--bg);
+    border-radius:14px;
+    padding:28px 20px;
+    text-align:center;
+    border:1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor:default;
+  }
+  .typo-fam:hover {
+    transform:translateY(-5px);
+    box-shadow:0 12px 32px rgba(26,30,60,0.1);
+  }
+  .typo-sample {
+    font-size:40px; color:var(--navy); margin-bottom:12px; display:block; line-height:1;
+  }
+  .typo-fam-name {
+    font-family:'Syne',sans-serif;
+    font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;
+  }
+  .typo-fam-example { font-size:12px; color:var(--slate); }
+  .typo-hierarchy {
+    background: var(--navy);
+    border-radius:16px;
+    padding:40px 48px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+  }
+  .typo-hier-left { border-right:1px solid var(--navy3); padding-right:40px; }
+  .typo-tier { margin-bottom:20px; }
+  .typo-tier:last-child { margin-bottom:0; }
+  .typo-tier-label { font-size:10px; color:var(--slate); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+  .typo-tier-sample { color:var(--white); line-height:1.2; }
+  .typo-hier-right { }
+  .typo-rule {
+    background:var(--navy2);
+    border-radius:10px; padding:16px 18px;
+    margin-bottom:12px; border:1px solid var(--navy3);
+    font-size:13px; color:var(--light); line-height:1.5;
+  }
+  .typo-rule strong { color:var(--coral); }
+
+  /* ══ 7. ESPAÇO E GRID ══ */
+  .space-section {
+    background: var(--bg);
+    padding: 80px 64px;
+  }
+  .space-inner { max-width:1000px; margin:0 auto; }
+  .space-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    margin-top:48px;
+  }
+  .space-card {
+    background:var(--white);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 24px rgba(26,30,60,0.07);
+  }
+  .space-card-top {
+    padding:48px 36px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .space-visual-white {
+    background:var(--navy);
+    border-radius:12px;
+    width:100%; height:160px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--white);
+    letter-spacing:2px;
+  }
+  .space-visual-grid {
+    background:var(--navy2);
+    border-radius:12px;
+    width:100%; height:160px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px; padding:16px;
+  }
+  .space-grid-col {
+    background:rgba(244,98,58,0.2);
+    border-radius:4px;
+    border:1px dashed rgba(244,98,58,0.4);
+  }
+  .space-card-body { padding:28px 32px; }
+  .space-card-title {
+    font-family:'Syne',sans-serif;
+    font-size:18px; font-weight:700; color:var(--navy); margin-bottom:10px;
+  }
+  .space-card-desc { font-size:14px; color:var(--slate); line-height:1.7; }
+  .space-card-quote {
+    margin-top:14px;
+    padding:12px 16px;
+    border-left:3px solid var(--coral);
+    font-size:13px; color:var(--navy); font-style:italic; line-height:1.6;
+    background:var(--bg); border-radius:0 8px 8px 0;
+  }
+
+  /* ══ 8. FUNCIONAL vs EMOCIONAL ══ */
+  .func-section {
+    background: var(--navy);
+    padding: 80px 64px;
+    position:relative; overflow:hidden;
+  }
+  .func-section::before {
+    content:'';
+    position:absolute; top:-80px; left:-80px;
+    width:350px; height:350px; border-radius:50%;
+    background:radial-gradient(circle,#F4623A12,transparent 70%);
+  }
+  .func-inner { max-width:1000px; margin:0 auto; }
+  .func-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-top:48px;
+    margin-bottom:32px;
+  }
+  .func-card {
+    border-radius:16px; overflow:hidden;
+    transition:transform 0.3s, box-shadow 0.3s; cursor:default;
+  }
+  .func-card:hover {
+    transform:translateY(-5px);
+    box-shadow:0 16px 36px rgba(0,0,0,0.3);
+  }
+  .func-card-header {
+    padding:28px 28px 20px;
+    background:var(--navy2);
+  }
+  .func-card-top-bar { height:4px; margin:-28px -28px 20px; }
+  .func-card-emoji { font-size:36px; margin-bottom:14px; display:block; }
+  .func-card-title {
+    font-family:'Syne',sans-serif;
+    font-size:20px; font-weight:800; color:var(--white); margin-bottom:6px;
+  }
+  .func-card-sub { font-size:13px; color:var(--slate); font-style:italic; }
+  .func-card-body {
+    background:var(--navy2);
+    padding:0 28px 28px;
+    border-top:1px solid var(--navy3);
+    padding-top:20px;
+  }
+  .func-criteria { display:flex; flex-direction:column; gap:12px; }
+  .func-criterion {
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .func-crit-dot {
+    width:8px; height:8px; border-radius:50%;
+    flex-shrink:0; margin-top:5px;
+  }
+  .func-crit-text { font-size:13.5px; color:var(--light); line-height:1.5; }
+  .func-crit-text strong { color:var(--white); }
+  .func-bridge {
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px;
+    padding:24px 32px;
+    font-size:15px; color:var(--light); line-height:1.7; text-align:center;
+  }
+  .func-bridge strong { color:var(--coral); }
+
+  /* ══ 9. NÍVEIS EMOCIONAIS (Norman) ══ */
+  .norman-section {
+    background: var(--white);
+    padding: 80px 64px;
+  }
+  .norman-inner { max-width:1000px; margin:0 auto; }
+  .norman-levels {
+    display:flex; flex-direction:column; gap:0;
+    margin-top:48px;
+    border-radius:16px; overflow:hidden;
+    box-shadow:0 8px 40px rgba(26,30,60,0.10);
+  }
+  .norman-level {
+    display:grid;
+    grid-template-columns:200px 1fr;
+    min-height:140px;
+    cursor:default;
+    transition:filter 0.3s;
+  }
+  .norman-level:hover { filter:brightness(1.03); }
+  .norman-level-left {
+    display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
+    text-align:center; padding:28px 20px;
+  }
+  .norman-level-num {
+    font-family:'Syne',sans-serif;
+    font-size:48px; font-weight:800; opacity:0.25; line-height:1;
+  }
+  .norman-level-name {
+    font-family:'Syne',sans-serif;
+    font-size:14px; font-weight:700; margin-top:8px;
+  }
+  .norman-level-right {
+    padding:32px 40px;
+    display:flex; flex-direction:column; justify-content:center;
+    border-left:1px solid rgba(255,255,255,0.1);
+  }
+  .norman-level-title {
+    font-family:'Syne',sans-serif;
+    font-size:18px; font-weight:700; margin-bottom:10px;
+  }
+  .norman-level-desc { font-size:14px; line-height:1.7; }
+  .norman-level-tag {
+    display:inline-block; margin-top:12px;
+    padding:4px 12px; border-radius:100px;
+    font-size:11px; font-weight:700;
+    font-family:'Syne',sans-serif; letter-spacing:1px;
+  }
+
+  /* ══ 10. DESIGN SYSTEM ══ */
+  .ds-section {
+    background: var(--bg);
+    padding: 80px 64px;
+  }
+  .ds-inner { max-width:1000px; margin:0 auto; }
+  .ds-intro {
+    background:var(--navy);
+    border-radius:16px;
+    padding:44px 52px;
+    margin-bottom:40px;
+    position:relative; overflow:hidden;
+  }
+  .ds-intro::after {
+    content:'DS';
+    position:absolute; right:40px; top:50%; transform:translateY(-50%);
+    font-family:'Syne',sans-serif; font-size:120px; font-weight:800;
+    color:var(--coral); opacity:0.06;
+  }
+  .ds-intro p {
+    font-family:'Syne',sans-serif;
+    font-size:clamp(18px,2vw,24px); font-weight:700; color:var(--white);
+    line-height:1.5; max-width:580px; position:relative;
+  }
+  .ds-intro p span { color:var(--coral); }
+  .ds-pillars {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+  }
+  .ds-pillar {
+    background:var(--white);
+    border-radius:14px; overflow:hidden;
+    box-shadow:0 4px 24px rgba(26,30,60,0.07);
+    transition:transform 0.3s, box-shadow 0.3s; cursor:default;
+  }
+  .ds-pillar:hover {
+    transform:translateY(-5px);
+    box-shadow:0 16px 40px rgba(26,30,60,0.12);
+  }
+  .ds-pillar-top { height:5px; }
+  .ds-pillar-body { padding:28px 24px; }
+  .ds-pillar-letter {
+    width:40px; height:40px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Syne',sans-serif; font-size:16px; font-weight:800;
+    margin-bottom:16px;
+  }
+  .ds-pillar-title {
+    font-family:'Syne',sans-serif;
+    font-size:16px; font-weight:700; color:var(--navy); margin-bottom:8px;
+  }
+  .ds-pillar-desc { font-size:13.5px; color:var(--slate); line-height:1.7; }
+
+  /* ══ 11. IDENTIDADE VISUAL ══ */
+  .identity-section {
+    background: var(--navy);
+    padding: 80px 64px;
+    position:relative; overflow:hidden;
+  }
+  .identity-inner { max-width:1000px; margin:0 auto; }
+  .identity-grid {
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+    margin-top:48px;
+  }
+  .identity-card {
+    background:var(--navy2);
+    border-radius:14px;
+    padding:28px 16px;
+    text-align:center;
+    border:1px solid var(--navy3);
+    transition:transform 0.3s, box-shadow 0.3s; cursor:default;
+  }
+  .identity-card:hover {
+    transform:translateY(-6px);
+    box-shadow:0 16px 36px rgba(0,0,0,0.3);
+  }
+  .identity-icon { font-size:34px; margin-bottom:14px; display:block; }
+  .identity-title {
+    font-family:'Syne',sans-serif;
+    font-size:13px; font-weight:700; color:var(--white); margin-bottom:8px;
+  }
+  .identity-desc { font-size:12px; color:var(--light); line-height:1.6; }
+  .identity-banner {
+    margin-top:32px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:12px; padding:24px 32px;
+    font-size:15px; color:var(--light); line-height:1.7; text-align:center;
+    font-style:italic;
+  }
+  .identity-banner strong { color:var(--coral); }
+
+  /* ══ 12. ENCERRAMENTO ══ */
+  .closing-section {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:85vh;
+  }
+  .closing-left {
+    background:var(--coral);
+    padding:80px 64px;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .closing-left::before {
+    content:'';
+    position:absolute; bottom:-60px; left:-60px;
+    width:260px; height:260px; border-radius:50%;
+    background:rgba(255,255,255,0.08);
+  }
+  .closing-left h2 {
+    font-family:'Syne',sans-serif;
+    font-size:clamp(32px,4vw,52px); font-weight:800;
+    color:var(--white); line-height:1.1;
+    position:relative; margin-bottom:24px;
+  }
+  .closing-left p {
+    font-size:17px; color:rgba(255,255,255,0.85);
+    font-weight:300; line-height:1.8;
+    position:relative;
+  }
+  .closing-right {
+    background:var(--navy);
+    padding:80px 64px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .closing-right h3 {
+    font-family:'Syne',sans-serif;
+    font-size:13px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--coral); margin-bottom:32px;
+  }
+  .closing-pillars { display:flex; flex-direction:column; gap:20px; }
+  .closing-pillar {
+    display:flex; gap:16px; align-items:flex-start;
+  }
+  .closing-badge {
+    width:36px; height:36px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; flex-shrink:0;
+  }
+  .closing-pillar-text strong {
+    font-family:'Syne',sans-serif;
+    font-size:14px; font-weight:700; color:var(--white);
+    display:block; margin-bottom:4px;
+  }
+  .closing-pillar-text span { font-size:13px; color:var(--light); line-height:1.5; }
+
+  /* ══ GESTALT ══ */
+  .gestalt-section {
+    background: var(--white);
+    padding: 80px 64px;
+  }
+  .gestalt-inner { max-width: 1000px; margin: 0 auto; }
+  .gestalt-intro {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 44px 52px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .gestalt-intro::after {
+    content: 'G';
+    position: absolute;
+    right: 32px; top: 50%; transform: translateY(-50%);
+    font-family: 'Syne', sans-serif;
+    font-size: 160px; font-weight: 800;
+    color: var(--coral); opacity: 0.06; line-height: 1;
+    pointer-events: none;
+  }
+  .gestalt-intro p {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(16px, 1.8vw, 22px);
+    font-weight: 700; color: var(--white);
+    line-height: 1.55; max-width: 600px; position: relative;
+  }
+  .gestalt-intro p span { color: var(--coral); }
+  .gestalt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .gestalt-card {
+    background: var(--bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .gestalt-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(26,30,60,0.12);
+    background: var(--white);
+  }
+  .gestalt-visual {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .gestalt-body { padding: 24px 22px 28px; }
+  .gestalt-law {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .gestalt-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px; font-weight: 800;
+    color: var(--navy); margin-bottom: 10px;
+  }
+  .gestalt-desc {
+    font-size: 13.5px; color: var(--slate); line-height: 1.7;
+  }
+  .gestalt-apply {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px; line-height: 1.5;
+    font-style: italic;
+    border-left: 3px solid;
+  }
+  .gestalt-banner {
+    margin-top: 36px;
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 24px 36px;
+    text-align: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--white); line-height: 1.6;
+  }
+  .gestalt-banner span { color: var(--coral); }
+
+  /* SVG visuals inside gestalt cards */
+  .g-svg { width: 100%; height: 100%; }
+
+  @media (max-width: 860px) {
+    .gestalt-section { padding: 60px 32px; }
+    .gestalt-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 540px) {
+    .gestalt-grid { grid-template-columns: 1fr; }
+  }
+
+
+  @media (max-width:860px) {
+    .hero, .what-section, .elements-section, .composition-section,
+    .color-section, .typo-section, .space-section, .func-section,
+    .norman-section, .ds-section, .identity-section { padding:60px 32px; }
+    .elements-grid { grid-template-columns:repeat(2,1fr); }
+    .composition-grid { grid-template-columns:1fr; }
+    .typo-families { grid-template-columns:repeat(2,1fr); }
+    .color-wheel-row, .func-grid, .ds-pillars,
+    .space-grid, .what-cols { grid-template-columns:1fr; }
+    .typo-hierarchy { grid-template-columns:1fr; }
+    .typo-hier-left { border-right:none; padding-right:0; border-bottom:1px solid var(--navy3); padding-bottom:32px; }
+    .identity-grid { grid-template-columns:repeat(2,1fr); }
+    .closing-section { grid-template-columns:1fr; }
+    .closing-left, .closing-right { padding:60px 32px; }
+    .norman-level { grid-template-columns:120px 1fr; }
+    .section-divider { margin:0 32px; }
+    .nav-dots { display:none; }
+    .hero-scroll { left:32px; }
+  }
+
+  /* ── GLOBAL NAV HEADER ── */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(26, 30, 60, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 200;
+  }
+  .site-header-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .site-header-logo-mark {
+    color: var(--coral);
+    font-size: 18px;
+  }
+  .site-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .site-header-nav a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--light);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.2s;
+  }
+  .site-header-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--coral);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  .site-header-nav a:hover,
+  .site-header-nav a.active { color: var(--white); }
+  .site-header-nav a:hover::after,
+  .site-header-nav a.active::after { transform: scaleX(1); }
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  .nav-mobile {
+    display: none;
+    position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: var(--navy2, #252A52);
+    flex-direction: column;
+    padding: 8px 0;
+    z-index: 199;
+    border-bottom: 2px solid var(--coral);
+  }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: var(--light);
+    text-decoration: none;
+    padding: 14px 40px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-mobile a:hover,
+  .nav-mobile a.active {
+    background: rgba(244,98,58,0.1);
+    color: var(--white);
+  }
+  @media (max-width: 768px) {
+    .site-header { padding: 0 24px; }
+    .site-header-nav { display: none; }
+    .nav-hamburger { display: block; }
+  }
+  body { padding-top: 60px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="site-header-logo">
+    <span class="site-header-logo-mark">◆</span>
+    Ensino Design
+  </a>
+  <nav class="site-header-nav" aria-label="Navegação principal">
+    <a href="index.html">Início</a>
+    <a href="fundamentosdodesign.html" class="active">Fundamentos</a>
+    <a href="diagnostico-time-design.html">Diagnóstico</a>
+    <a href="intencao-comunicativa.html">Intenção</a>
+  </nav>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">≡</button>
+</header>
+<nav class="nav-mobile" id="nav-mobile" aria-label="Navegação mobile">
+  <a href="index.html">Início</a>
+  <a href="fundamentosdodesign.html" class="active">Fundamentos</a>
+  <a href="diagnostico-time-design.html">Diagnóstico</a>
+  <a href="intencao-comunicativa.html">Intenção</a>
+</nav>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots">
+  <button class="nav-dot active" data-section="0" title="Capa"></button>
+  <button class="nav-dot" data-section="1" title="O que é Design"></button>
+  <button class="nav-dot" data-section="2" title="Elementos Visuais"></button>
+  <button class="nav-dot" data-section="3" title="Composição"></button>
+  <button class="nav-dot" data-section="4" title="Cores"></button>
+  <button class="nav-dot" data-section="5" title="Tipografia"></button>
+  <button class="nav-dot" data-section="6" title="Espaço e Grid"></button>
+  <button class="nav-dot" data-section="7" title="Funcional vs Emocional"></button>
+  <button class="nav-dot" data-section="8" title="Níveis Emocionais"></button>
+  <button class="nav-dot" data-section="9" title="Design System"></button>
+  <button class="nav-dot" data-section="10" title="Identidade Visual"></button>
+  <button class="nav-dot" data-section="11" title="Gestalt"></button>
+  <button class="nav-dot" data-section="12" title="Conclusão"></button>
+</nav>
+
+<!-- ══ 1. CAPA ══ -->
+<section class="hero" data-section="0">
+  <div class="hero-accent"></div>
+  <div class="hero-geo"></div>
+  <div class="hero-geo2"></div>
+  <div class="hero-pill fade-in">Time de Design — Formação</div>
+  <h1 class="fade-in" style="transition-delay:0.1s">
+    Fundamentos<br>do <span>Design</span><br>Gráfico
+  </h1>
+  <p class="hero-sub fade-in" style="transition-delay:0.2s">
+    Os princípios que transformam<br>comunicação em arte — e arte em resultado.
+  </p>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Role para explorar
+  </div>
+</section>
+
+<!-- ══ 2. O QUE É DESIGN ══ -->
+<section class="what-section" data-section="1">
+  <div class="what-inner">
+    <div class="section-tag fade-in">Capítulo 01</div>
+    <h2 class="section-heading fade-in" style="transition-delay:0.05s">O que é<br>Design Gráfico?</h2>
+    <div class="what-quote fade-in" style="transition-delay:0.1s">
+      <p>Design gráfico é a disciplina que combina elementos visuais e texto para <span>comunicar mensagens de forma eficaz.</span> Vai muito além da estética — é sobre resolver problemas visuais com intenção e clareza.</p>
+    </div>
+    <div class="what-cols">
+      <div class="what-col fade-in" style="transition-delay:0.15s">
+        <span class="what-col-icon">🎯</span>
+        <div class="what-col-title">Resolver problemas</div>
+        <div class="what-col-desc">Design não decora — ele resolve. Cada decisão visual existe para facilitar uma tarefa, guiar uma ação ou transmitir uma informação com clareza e propósito.</div>
+      </div>
+      <div class="what-col fade-in" style="transition-delay:0.2s">
+        <span class="what-col-icon">💬</span>
+        <div class="what-col-title">Comunicar com intenção</div>
+        <div class="what-col-desc">Todo elemento em uma peça gráfica está lá por uma razão. Quando não está, está sobrando. A intenção comunicativa é o que separa quem decora de quem projeta.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ 3. ELEMENTOS VISUAIS ══ -->
+<section class="elements-section" data-section="2">
+  <div class="elements-inner">
+    <div class="section-tag fade-in" style="color:var(--teal)">Capítulo 02</div>
+    <h2 class="section-heading light fade-in" style="transition-delay:0.05s">Os Elementos<br>Visuais</h2>
+    <p class="fade-in" style="color:var(--light);font-size:16px;max-width:560px;line-height:1.7;margin-bottom:0;transition-delay:0.1s">Os blocos de construção de qualquer composição. Dominar cada um é o primeiro passo para criar com controle e intenção.</p>
+    <div class="elements-grid">
+      <div class="element-card fade-in" style="transition-delay:0.1s">
+        <span class="element-icon">·</span>
+        <div class="element-title">Ponto</div>
+        <div class="element-desc">A menor unidade visual. Base de tudo o que existe em uma composição.</div>
+      </div>
+      <div class="element-card fade-in" style="transition-delay:0.13s">
+        <span class="element-icon">╱</span>
+        <div class="element-title">Linha</div>
+        <div class="element-desc">Direção, movimento e divisão. Guia o olhar e organiza o espaço.</div>
+      </div>
+      <div class="element-card fade-in" style="transition-delay:0.16s">
+        <span class="element-icon">▲</span>
+        <div class="element-title">Forma</div>
+        <div class="element-desc">Geométrica, orgânica ou abstrata. Carrega personalidade e significado.</div>
+      </div>
+      <div class="element-card highlight fade-in" style="transition-delay:0.19s">
+        <span class="element-icon">🎨</span>
+        <div class="element-title">Cor</div>
+        <div class="element-desc">Emoção, identidade e hierarquia. O elemento mais imediato e poderoso.</div>
+      </div>
+      <div class="element-card fade-in" style="transition-delay:0.22s">
+        <span class="element-icon">Aa</span>
+        <div class="element-title">Tipografia</div>
+        <div class="element-desc">A voz do design e da marca. Forma e conteúdo ao mesmo tempo.</div>
+      </div>
+      <div class="element-card fade-in" style="transition-delay:0.25s">
+        <span class="element-icon">≋</span>
+        <div class="element-title">Textura</div>
+        <div class="element-desc">Sensação e profundidade. Adiciona tato ao que é visual.</div>
+      </div>
+      <div class="element-card fade-in" style="transition-delay:0.28s">
+        <span class="element-icon">□</span>
+        <div class="element-title">Espaço</div>
+        <div class="element-desc">O que está presente e o que está ausente. O silêncio visual que dá respiro.</div>
+      </div>
+      <div class="element-card fade-in" style="background:var(--navy3);border-color:var(--navy3);transition-delay:0.31s">
+        <span class="element-icon" style="opacity:0.3">∞</span>
+        <div class="element-title" style="opacity:0.4">Combinação</div>
+        <div class="element-desc" style="opacity:0.4">A maestria está em saber quando e como cada elemento serve à mensagem.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. PRINCÍPIOS DE COMPOSIÇÃO ══ -->
+<section style="padding:80px 0;background:var(--bg)" data-section="3">
+  <div class="composition-section" style="padding-top:0;padding-bottom:0">
+    <div class="section-tag fade-in">Capítulo 03</div>
+    <h2 class="section-heading fade-in" style="transition-delay:0.05s">Princípios de<br>Composição</h2>
+    <div class="composition-grid">
+      <div class="comp-card fade-in" style="transition-delay:0.08s">
+        <div class="comp-bar" style="background:var(--coral)"></div>
+        <div class="comp-body">
+          <div class="comp-num">01</div>
+          <div class="comp-title">Hierarquia Visual</div>
+          <div class="comp-desc">Guia o olhar do mais para o menos importante. Se tudo grita ao mesmo tempo, nada é ouvido.</div>
+        </div>
+      </div>
+      <div class="comp-card fade-in" style="transition-delay:0.12s">
+        <div class="comp-bar" style="background:var(--yellow)"></div>
+        <div class="comp-body">
+          <div class="comp-num">02</div>
+          <div class="comp-title">Equilíbrio</div>
+          <div class="comp-desc">Simétrico ou assimétrico — ambos criam estabilidade. A diferença está na sensação que cada um transmite.</div>
+        </div>
+      </div>
+      <div class="comp-card fade-in" style="transition-delay:0.16s">
+        <div class="comp-bar" style="background:var(--teal)"></div>
+        <div class="comp-body">
+          <div class="comp-num">03</div>
+          <div class="comp-title">Contraste</div>
+          <div class="comp-desc">Diferença que gera destaque e legibilidade. Sem contraste, não há hierarquia. Sem hierarquia, não há comunicação.</div>
+        </div>
+      </div>
+      <div class="comp-card fade-in" style="transition-delay:0.2s">
+        <div class="comp-bar" style="background:var(--violet)"></div>
+        <div class="comp-body">
+          <div class="comp-num">04</div>
+          <div class="comp-title">Alinhamento</div>
+          <div class="comp-desc">Ordem e coesão entre os elementos. Mesmo invisível, o alinhamento cria confiança e profissionalismo.</div>
+        </div>
+      </div>
+      <div class="comp-card fade-in" style="transition-delay:0.24s">
+        <div class="comp-bar" style="background:var(--green)"></div>
+        <div class="comp-body">
+          <div class="comp-num">05</div>
+          <div class="comp-title">Proximidade</div>
+          <div class="comp-desc">Agrupa o que é relacionado. Elementos próximos são lidos como parte de um mesmo conjunto.</div>
+        </div>
+      </div>
+      <div class="comp-card fade-in" style="transition-delay:0.28s">
+        <div class="comp-bar" style="background:var(--coral)"></div>
+        <div class="comp-body">
+          <div class="comp-num">06</div>
+          <div class="comp-title">Repetição</div>
+          <div class="comp-desc">Cria ritmo e consistência. É o que transforma elementos soltos em um sistema visual reconhecível.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ 5. TEORIA DAS CORES ══ -->
+<section class="color-section" data-section="4">
+  <div class="color-inner">
+    <div class="section-tag fade-in" style="color:var(--teal)">Capítulo 04</div>
+    <h2 class="section-heading light fade-in" style="transition-delay:0.05s">Teoria<br>das Cores</h2>
+    <div class="color-wheel-row">
+      <div class="color-palettes fade-in" style="transition-delay:0.1s">
+        <div class="palette-item">
+          <div class="palette-name">Monocromática</div>
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#1A1E3C"></div>
+            <div class="swatch" style="background:#252A52"></div>
+            <div class="swatch" style="background:#3D4580"></div>
+            <div class="swatch" style="background:#6673B8"></div>
+            <div class="swatch" style="background:#CCD6F6"></div>
+          </div>
+        </div>
+        <div class="palette-item">
+          <div class="palette-name">Complementar</div>
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#F4623A"></div>
+            <div class="swatch" style="background:#F8936E"></div>
+            <div class="swatch" style="background:#2A2A2A"></div>
+            <div class="swatch" style="background:#3ABCF4"></div>
+            <div class="swatch" style="background:#1A8AB8"></div>
+          </div>
+        </div>
+        <div class="palette-item">
+          <div class="palette-name">Análoga</div>
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#F4623A"></div>
+            <div class="swatch" style="background:#FFD166"></div>
+            <div class="swatch" style="background:#06D6A0"></div>
+            <div class="swatch" style="background:#4ECDC4"></div>
+            <div class="swatch" style="background:#9B5DE5"></div>
+          </div>
+        </div>
+        <div class="palette-item">
+          <div class="palette-name">Triádica</div>
+          <div class="palette-swatches">
+            <div class="swatch" style="background:#F4623A"></div>
+            <div class="swatch" style="background:#3AF46A"></div>
+            <div class="swatch" style="background:#3A62F4"></div>
+            <div class="swatch" style="background:#F4623A88"></div>
+            <div class="swatch" style="background:#3AF46A88"></div>
+          </div>
+        </div>
+      </div>
+      <div class="color-facts fade-in" style="transition-delay:0.15s">
+        <div class="color-fact">
+          <div class="color-fact-dot" style="background:var(--coral)"></div>
+          <div class="color-fact-text"><strong>Temperatura</strong> — Cores quentes (vermelho, laranja, amarelo) transmitem energia e urgência. Cores frias (azul, verde, violeta) transmitem calma e confiança.</div>
+        </div>
+        <div class="color-fact">
+          <div class="color-fact-dot" style="background:var(--yellow)"></div>
+          <div class="color-fact-text"><strong>Psicologia</strong> — Cada cor carrega significados culturais e emocionais. Vermelho é ação. Azul é confiança. Verde é equilíbrio. O contexto sempre importa.</div>
+        </div>
+        <div class="color-fact">
+          <div class="color-fact-dot" style="background:var(--teal)"></div>
+          <div class="color-fact-text"><strong>Hierarquia</strong> — A cor mais saturada e contrastante atrai o olhar primeiro. Use isso para guiar a leitura, não para decorar.</div>
+        </div>
+        <div class="color-fact">
+          <div class="color-fact-dot" style="background:var(--violet)"></div>
+          <div class="color-fact-text"><strong>Identidade</strong> — A paleta de uma marca é uma das decisões mais estratégicas do design. Ela precisa funcionar em todos os contextos e mídias.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6. TIPOGRAFIA ══ -->
+<section class="typo-section" data-section="5">
+  <div class="typo-inner">
+    <div class="section-tag fade-in">Capítulo 05</div>
+    <h2 class="section-heading fade-in" style="transition-delay:0.05s">Tipografia<br>— a voz do design</h2>
+    <div class="typo-families">
+      <div class="typo-fam fade-in" style="transition-delay:0.1s">
+        <span class="typo-sample" style="font-family:Georgia,serif">Aa</span>
+        <div class="typo-fam-name">Serif</div>
+        <div class="typo-fam-example">Georgia · Times · Garamond</div>
+      </div>
+      <div class="typo-fam fade-in" style="transition-delay:0.14s">
+        <span class="typo-sample" style="font-family:'DM Sans',sans-serif;font-weight:700">Aa</span>
+        <div class="typo-fam-name">Sans-Serif</div>
+        <div class="typo-fam-example">Helvetica · Inter · DM Sans</div>
+      </div>
+      <div class="typo-fam fade-in" style="transition-delay:0.18s">
+        <span class="typo-sample" style="font-family:cursive;font-size:36px">Aa</span>
+        <div class="typo-fam-name">Script</div>
+        <div class="typo-fam-example">Pacifico · Lobster · Dancing</div>
+      </div>
+      <div class="typo-fam fade-in" style="transition-delay:0.22s">
+        <span class="typo-sample" style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-2px">Aa</span>
+        <div class="typo-fam-name">Display</div>
+        <div class="typo-fam-example">Syne · Bebas · Anton</div>
+      </div>
+    </div>
+    <div class="typo-hierarchy fade-in" style="transition-delay:0.25s">
+      <div class="typo-hier-left">
+        <div class="typo-tier">
+          <div class="typo-tier-label">Título</div>
+          <div class="typo-tier-sample" style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800">Hierarquia</div>
+        </div>
+        <div class="typo-tier">
+          <div class="typo-tier-label">Subtítulo</div>
+          <div class="typo-tier-sample" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:600;color:var(--light)">A voz do design</div>
+        </div>
+        <div class="typo-tier">
+          <div class="typo-tier-label">Corpo</div>
+          <div class="typo-tier-sample" style="font-size:15px;font-weight:300;color:var(--slate)">O texto que sustenta e detalha a mensagem principal de forma legível e fluida.</div>
+        </div>
+        <div class="typo-tier" style="margin-top:8px">
+          <div class="typo-tier-label">Legenda</div>
+          <div class="typo-tier-sample" style="font-size:11px;color:var(--slate);letter-spacing:1px;text-transform:uppercase">Contexto e referência complementar</div>
+        </div>
+      </div>
+      <div class="typo-hier-right">
+        <div class="typo-rule"><strong>Legibilidade</strong> — O leitor consegue decodificar o texto sem esforço? Tamanho, contraste e espaçamento são os fatores principais.</div>
+        <div class="typo-rule"><strong>Leiturabilidade</strong> — O conjunto do texto é confortável para ler por mais tempo? Entrelinhamento e medida da coluna definem isso.</div>
+        <div class="typo-rule"><strong>Combinação</strong> — Misture famílias com contraste de personalidade. Serif + Sans-Serif é o par mais seguro e versátil.</div>
+        <div class="typo-rule"><strong>Regra dos 3</strong> — Use no máximo 3 tamanhos e 2 famílias por peça. Mais que isso, o design perde coesão.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7. ESPAÇO E GRID ══ -->
+<section class="space-section" data-section="6">
+  <div class="space-inner">
+    <div class="section-tag fade-in">Capítulo 06 · 07</div>
+    <h2 class="section-heading fade-in" style="transition-delay:0.05s">Espaço em Branco<br>e Grid</h2>
+    <div class="space-grid">
+      <div class="space-card fade-in" style="transition-delay:0.1s">
+        <div class="space-card-top" style="background:#F0F2FA">
+          <div class="space-visual-white">respiro</div>
+        </div>
+        <div class="space-card-body">
+          <div class="space-card-title">Espaço em Branco</div>
+          <div class="space-card-desc">O espaço não usado não é desperdício — é respiração. Ele direciona o foco, reduz o ruído visual e confere elegância à composição.</div>
+          <div class="space-card-quote">Grandes marcas constroem identidade pelo que <em>não</em> mostram.</div>
+        </div>
+      </div>
+      <div class="space-card fade-in" style="transition-delay:0.15s">
+        <div class="space-card-top" style="background:#1E2240">
+          <div class="space-visual-grid">
+            <div class="space-grid-col"></div>
+            <div class="space-grid-col"></div>
+            <div class="space-grid-col"></div>
+          </div>
+        </div>
+        <div class="space-card-body">
+          <div class="space-card-title">Grid e Estrutura</div>
+          <div class="space-card-desc">O grid é o esqueleto invisível do layout. Sistemas de 3, 6 ou 12 colunas criam consistência sem sufocar a criatividade.</div>
+          <div class="space-card-quote">Regra dos terços, proporção áurea, Fibonacci — estrutura que libera em vez de prender.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ 8. FUNCIONAL vs EMOCIONAL ══ -->
+<section class="func-section" data-section="7">
+  <div class="func-inner">
+    <div class="section-tag fade-in" style="color:var(--teal)">Capítulo 08 · 09</div>
+    <h2 class="section-heading light fade-in" style="transition-delay:0.05s">Design Funcional<br>vs. Emocional</h2>
+    <div class="func-grid">
+      <div class="func-card fade-in" style="transition-delay:0.1s">
+        <div class="func-card-header">
+          <div class="func-card-top-bar" style="background:var(--coral)"></div>
+          <span class="func-card-emoji">⚙️</span>
+          <div class="func-card-title">Design Funcional</div>
+          <div class="func-card-sub">O design que resolve antes de impressionar</div>
+        </div>
+        <div class="func-card-body">
+          <div class="func-criteria">
+            <div class="func-criterion">
+              <div class="func-crit-dot" style="background:var(--coral)"></div>
+              <div class="func-crit-text"><strong>Usabilidade</strong> — o usuário consegue completar o que veio fazer?</div>
+            </div>
+            <div class="func-criterion">
+              <div class="func-crit-dot" style="background:var(--coral)"></div>
+              <div class="func-crit-text"><strong>Legibilidade</strong> — o conteúdo é compreendido sem esforço?</div>
+            </div>
+            <div class="func-criterion">
+              <div class="func-crit-dot" style="background:var(--coral)"></div>
+              <div class="func-crit-text"><strong>Acessibilidade</strong> — o design funciona para todos?</div>
+            </div>
+            <div class="func-criterion">
+              <div class="func-crit-dot" style="background:var(--coral)"></div>
+              <div class="func-crit-text"><strong>Eficiência</strong> — o caminho entre intenção e ação é o mais curto?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="func-card fade-in" style="transition-delay:0.15s">
+        <div class="func-card-header">
+          <div class="func-card-top-bar" style="background:var(--violet)"></div>
+          <span class="func-card-emoji">💜</span>
+          <div class="func-card-title">Design Emocional</div>
+          <div class="func-card-sub">O design que cria conexão antes de convencer</div>
+        </div>
+        <div class="func-card-body">
+          <div class="func-criteria">
+            <div class="func-criterion">
+              <div class="func-crit-dot" style="background:var(--violet)"></div>
+              <div class="func-crit-text"><strong>Nível Visceral</strong> — reação imediata ao visual, antes do pensamento</div>
+            </div>
+            <div class="func-criterion">
+              <div class="func-crit-dot" style="background:var(--violet)"></div>
+              <div class="func-crit-text"><strong>Nível Comportamental</strong> — fluência e prazer durante o uso</div>
+            </div>
+            <div class="func-criterion">
+              <div class="func-crit-dot" style="background:var(--violet)"></div>
+              <div class="func-crit-text"><strong>Nível Reflexivo</strong> — significado construído depois da experiência</div>
+            </div>
+            <div class="func-criterion">
+              <div class="func-crit-dot" style="background:var(--violet)"></div>
+              <div class="func-crit-text"><strong>Lealdade</strong> — apego e identidade com a marca ou produto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="func-bridge fade-in" style="transition-delay:0.2s">
+      <strong>Design funcional</strong> garante que algo <em>funcione</em>. <strong>Design emocional</strong> garante que algo seja <em>lembrado</em>. A tensão produtiva entre os dois é onde o design de excelência acontece.
+    </div>
+  </div>
+</section>
+
+<!-- ══ 9. NÍVEIS DE NORMAN ══ -->
+<section class="norman-section" data-section="8">
+  <div class="norman-inner">
+    <div class="section-tag fade-in">Don Norman · Design Emocional</div>
+    <h2 class="section-heading fade-in" style="transition-delay:0.05s">Os 3 Níveis<br>da Experiência</h2>
+    <div class="norman-levels fade-in" style="transition-delay:0.1s">
+      <div class="norman-level" style="background:#FFF0EC">
+        <div class="norman-level-left" style="background:#F4623A">
+          <div class="norman-level-num" style="color:#fff">01</div>
+          <div class="norman-level-name" style="color:#fff">Visceral</div>
+        </div>
+        <div class="norman-level-right">
+          <div class="norman-level-title" style="color:var(--coral)">A reação instintiva</div>
+          <div class="norman-level-desc" style="color:#555">Acontece antes do pensamento consciente — "isso me atrai" ou "isso me repele". Cor, forma e movimento são os gatilhos principais. É o primeiro segundo de contato.</div>
+          <span class="norman-level-tag" style="background:#FFF0EC;color:var(--coral);border:1px solid #F4623A44">Gatilhos: cor · forma · movimento</span>
+        </div>
+      </div>
+      <div class="norman-level" style="background:#EDFAF9">
+        <div class="norman-level-left" style="background:var(--teal)">
+          <div class="norman-level-num" style="color:#fff">02</div>
+          <div class="norman-level-name" style="color:#fff">Comportamental</div>
+        </div>
+        <div class="norman-level-right">
+          <div class="norman-level-title" style="color:#2A9E97">A fluência do uso</div>
+          <div class="norman-level-desc" style="color:#555">A sensação de prazer durante o uso. Um fluxo bem desenhado que responde como o usuário espera gera satisfação e confiança. É sobre o durante.</div>
+          <span class="norman-level-tag" style="background:#EDFAF9;color:#2A9E97;border:1px solid #4ECDC444">Gatilhos: fluxo · resposta · prazer</span>
+        </div>
+      </div>
+      <div class="norman-level" style="background:#F5EEFF">
+        <div class="norman-level-left" style="background:var(--violet)">
+          <div class="norman-level-num" style="color:#fff">03</div>
+          <div class="norman-level-name" style="color:#fff">Reflexivo</div>
+        </div>
+        <div class="norman-level-right">
+          <div class="norman-level-title" style="color:var(--violet)">O significado construído</div>
+          <div class="norman-level-desc" style="color:#555">O significado que o usuário constrói depois da experiência. É aqui que nascem o apego, a lealdade e a identidade com uma marca ou produto.</div>
+          <span class="norman-level-tag" style="background:#F5EEFF;color:var(--violet);border:1px solid #9B5DE544">Gatilhos: memória · identidade · apego</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10. DESIGN SYSTEM ══ -->
+<section class="ds-section" data-section="9">
+  <div class="ds-inner">
+    <div class="section-tag fade-in">Capítulo 11 · 12 · 13</div>
+    <h2 class="section-heading fade-in" style="transition-delay:0.05s">Design System<br>— da peça ao ecossistema</h2>
+    <div class="ds-intro fade-in" style="transition-delay:0.1s">
+      <p>Um Design System é um conjunto vivo de decisões de design documentadas e compartilhadas. Não é uma biblioteca — é uma <span>linguagem visual comum que escala com o time.</span></p>
+    </div>
+    <div class="ds-pillars">
+      <div class="ds-pillar fade-in" style="transition-delay:0.12s">
+        <div class="ds-pillar-top" style="background:var(--coral)"></div>
+        <div class="ds-pillar-body">
+          <div class="ds-pillar-letter" style="background:#F4623A22;color:var(--coral)">T</div>
+          <div class="ds-pillar-title">Tokens de Design</div>
+          <div class="ds-pillar-desc">Os valores atômicos do sistema: cores, tipografia, espaçamento, sombras, raios de borda. Nomeados por função — <em>color-primary</em>, não <em>azul-escuro</em>.</div>
+        </div>
+      </div>
+      <div class="ds-pillar fade-in" style="transition-delay:0.16s">
+        <div class="ds-pillar-top" style="background:var(--yellow)"></div>
+        <div class="ds-pillar-body">
+          <div class="ds-pillar-letter" style="background:#FFD16633;color:#B8860B">C</div>
+          <div class="ds-pillar-title">Componentes</div>
+          <div class="ds-pillar-desc">Elementos reutilizáveis — botões, inputs, cards, modais — construídos sobre os tokens. Cada um com variantes, estados e documentação de uso.</div>
+        </div>
+      </div>
+      <div class="ds-pillar fade-in" style="transition-delay:0.2s">
+        <div class="ds-pillar-top" style="background:var(--teal)"></div>
+        <div class="ds-pillar-body">
+          <div class="ds-pillar-letter" style="background:#4ECDC433;color:var(--teal)">P</div>
+          <div class="ds-pillar-title">Padrões</div>
+          <div class="ds-pillar-desc">Combinações recorrentes de componentes que resolvem problemas comuns: formulários, navegação, feedback de sistema, estados de erro.</div>
+        </div>
+      </div>
+      <div class="ds-pillar fade-in" style="transition-delay:0.24s">
+        <div class="ds-pillar-top" style="background:var(--violet)"></div>
+        <div class="ds-pillar-body">
+          <div class="ds-pillar-letter" style="background:#9B5DE533;color:var(--violet)">D</div>
+          <div class="ds-pillar-title">Diretrizes</div>
+          <div class="ds-pillar-desc">As regras editoriais, de acessibilidade e de voz que orientam como e quando usar cada elemento. O que pode e o que não pode.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 11. IDENTIDADE VISUAL ══ -->
+<section class="identity-section" data-section="10">
+  <div class="identity-inner">
+    <div class="section-tag fade-in" style="color:var(--teal)">Capítulo 14</div>
+    <h2 class="section-heading light fade-in" style="transition-delay:0.05s">Identidade Visual<br>na Prática</h2>
+    <div class="identity-grid">
+      <div class="identity-card fade-in" style="transition-delay:0.08s">
+        <span class="identity-icon">⬡</span>
+        <div class="identity-title">Logo e Símbolo</div>
+        <div class="identity-desc">A assinatura visual da marca. Precisa funcionar em preto e branco, pequeno e grande.</div>
+      </div>
+      <div class="identity-card fade-in" style="transition-delay:0.12s">
+        <span class="identity-icon">🎨</span>
+        <div class="identity-title">Paleta Institucional</div>
+        <div class="identity-desc">Cores com papéis definidos: primária, secundária, neutra, de ação, de alerta.</div>
+      </div>
+      <div class="identity-card fade-in" style="transition-delay:0.16s">
+        <span class="identity-icon">Tt</span>
+        <div class="identity-title">Tipografia da Marca</div>
+        <div class="identity-desc">Uma ou duas famílias que carregam a personalidade e garantem consistência em todos os materiais.</div>
+      </div>
+      <div class="identity-card fade-in" style="transition-delay:0.2s">
+        <span class="identity-icon">≋</span>
+        <div class="identity-title">Padrões e Texturas</div>
+        <div class="identity-desc">Elementos gráficos que ampliam o vocabulário visual além do logo e das cores.</div>
+      </div>
+      <div class="identity-card highlight fade-in" style="background:var(--coral);border-color:var(--coral);transition-delay:0.24s">
+        <span class="identity-icon">👁</span>
+        <div class="identity-title" style="color:#fff">Tom Visual</div>
+        <div class="identity-desc" style="color:rgba(255,255,255,0.9)">O que a marca parece ser antes de falar qualquer coisa. A primeira impressão que nenhum texto substitui.</div>
+      </div>
+    </div>
+    <div class="identity-banner fade-in" style="transition-delay:0.28s">
+      A identidade visual é a prova de que os fundamentos foram compreendidos profundamente o suficiente para serem <strong>ensinados ao mercado</strong>.
+    </div>
+  </div>
+</section>
+
+<!-- ══ 12. GESTALT ══ -->
+<section class="gestalt-section" data-section="11">
+  <div class="gestalt-inner">
+    <div class="section-tag fade-in">Capítulo 15</div>
+    <h2 class="section-heading fade-in" style="transition-delay:0.05s">Gestalt<br>— como o cérebro vê</h2>
+
+    <div class="gestalt-intro fade-in" style="transition-delay:0.1s">
+      <p>A Gestalt é a teoria que explica como o cérebro humano <span>organiza automaticamente</span> o que vê. Antes de qualquer decisão consciente, a percepção já agrupou, separou e interpretou os elementos visuais. Dominar esses mecanismos é controlar como o público lê uma peça.</p>
+    </div>
+
+    <div class="gestalt-grid">
+
+      <!-- 1. Proximidade -->
+      <div class="gestalt-card fade-in" style="transition-delay:0.1s">
+        <div class="gestalt-visual" style="background:#FFF0EC">
+          <svg class="g-svg" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- grupo 1 -->
+            <circle cx="60" cy="55" r="12" fill="#F4623A" opacity="0.9"/>
+            <circle cx="88" cy="55" r="12" fill="#F4623A" opacity="0.9"/>
+            <circle cx="74" cy="80" r="12" fill="#F4623A" opacity="0.9"/>
+            <!-- grupo 2 -->
+            <circle cx="152" cy="55" r="12" fill="#1A1E3C" opacity="0.7"/>
+            <circle cx="180" cy="55" r="12" fill="#1A1E3C" opacity="0.7"/>
+            <circle cx="166" cy="80" r="12" fill="#1A1E3C" opacity="0.7"/>
+            <!-- label -->
+            <text x="120" y="125" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8892B0">próximos = agrupados</text>
+          </svg>
+        </div>
+        <div class="gestalt-body">
+          <div class="gestalt-law" style="color:var(--coral)">Lei 01</div>
+          <div class="gestalt-title">Proximidade</div>
+          <div class="gestalt-desc">Elementos próximos são percebidos como pertencentes ao mesmo grupo, independente de cor ou forma.</div>
+          <div class="gestalt-apply" style="background:#FFF0EC;border-color:var(--coral);color:#C43A15">
+            No design: agrupe informações relacionadas e separe blocos distintos com espaço generoso.
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Similaridade -->
+      <div class="gestalt-card fade-in" style="transition-delay:0.14s">
+        <div class="gestalt-visual" style="background:#EDFAF9">
+          <svg class="g-svg" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="52" cy="50" r="11" fill="#4ECDC4" opacity="0.9"/>
+            <rect x="82" y="40" width="22" height="22" rx="3" fill="#1A1E3C" opacity="0.7"/>
+            <circle cx="132" cy="50" r="11" fill="#4ECDC4" opacity="0.9"/>
+            <rect x="158" y="40" width="22" height="22" rx="3" fill="#1A1E3C" opacity="0.7"/>
+            <circle cx="52" cy="90" r="11" fill="#4ECDC4" opacity="0.9"/>
+            <circle cx="100" cy="90" r="11" fill="#4ECDC4" opacity="0.9"/>
+            <rect x="130" y="80" width="22" height="22" rx="3" fill="#1A1E3C" opacity="0.7"/>
+            <rect x="162" y="80" width="22" height="22" rx="3" fill="#1A1E3C" opacity="0.7"/>
+            <text x="120" y="125" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8892B0">semelhantes = mesma família</text>
+          </svg>
+        </div>
+        <div class="gestalt-body">
+          <div class="gestalt-law" style="color:var(--teal)">Lei 02</div>
+          <div class="gestalt-title">Similaridade</div>
+          <div class="gestalt-desc">Elementos que compartilham cor, forma ou tamanho são percebidos como parte do mesmo conjunto.</div>
+          <div class="gestalt-apply" style="background:#EDFAF9;border-color:var(--teal);color:#2A9E97">
+            No design: use cor e forma de forma consistente para criar categorias visuais sem precisar de texto.
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Continuidade -->
+      <div class="gestalt-card fade-in" style="transition-delay:0.18s">
+        <div class="gestalt-visual" style="background:#FFFBEE">
+          <svg class="g-svg" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 100 Q80 20 120 70 Q160 120 210 40" stroke="#FFD166" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <circle cx="30"  cy="100" r="5" fill="#FFD166"/>
+            <circle cx="80"  cy="35"  r="5" fill="#FFD166"/>
+            <circle cx="120" cy="70"  r="5" fill="#FFD166"/>
+            <circle cx="160" cy="107" r="5" fill="#FFD166"/>
+            <circle cx="210" cy="40"  r="5" fill="#FFD166"/>
+            <text x="120" y="128" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8892B0">fluxo guia o olhar</text>
+          </svg>
+        </div>
+        <div class="gestalt-body">
+          <div class="gestalt-law" style="color:#B8860B">Lei 03</div>
+          <div class="gestalt-title">Continuidade</div>
+          <div class="gestalt-desc">O olho segue naturalmente linhas e curvas, preferindo caminhos suaves a mudanças abruptas de direção.</div>
+          <div class="gestalt-apply" style="background:#FFFBEE;border-color:#FFD166;color:#997700">
+            No design: use linhas, setas e alinhamentos para guiar o olhar em direção ao CTA ou à informação principal.
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Fechamento -->
+      <div class="gestalt-card fade-in" style="transition-delay:0.22s">
+        <div class="gestalt-visual" style="background:#F5EEFF">
+          <svg class="g-svg" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- triângulo incompleto -->
+            <path d="M120 28 L170 105" stroke="#9B5DE5" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M170 105 L70 105" stroke="#9B5DE5" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M70 105 L100 55" stroke="#9B5DE5" stroke-width="3.5" stroke-dasharray="8 6" fill="none" stroke-linecap="round"/>
+            <text x="120" y="128" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8892B0">o cérebro completa a forma</text>
+          </svg>
+        </div>
+        <div class="gestalt-body">
+          <div class="gestalt-law" style="color:var(--violet)">Lei 04</div>
+          <div class="gestalt-title">Fechamento</div>
+          <div class="gestalt-desc">O cérebro tende a completar formas incompletas, preenchendo as lacunas para criar um todo coerente.</div>
+          <div class="gestalt-apply" style="background:#F5EEFF;border-color:var(--violet);color:#6B2AB5">
+            No design: logos negativos, ícones minimalistas e contornos parciais exploram esse mecanismo para criar sofisticação.
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Figura e Fundo -->
+      <div class="gestalt-card fade-in" style="transition-delay:0.26s">
+        <div class="gestalt-visual" style="background:#1A1E3C">
+          <svg class="g-svg" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- vaso/faces ambíguo -->
+            <path d="M120 20 C95 20 70 45 60 70 C50 95 55 115 70 115 L170 115 C185 115 190 95 180 70 C170 45 145 20 120 20 Z" fill="#F4F5FA"/>
+            <!-- faces escuras dos lados -->
+            <path d="M60 115 C40 115 25 95 25 70 C25 45 40 20 60 20 L60 115 Z" fill="#252A52"/>
+            <path d="M180 115 C200 115 215 95 215 70 C215 45 200 20 180 20 L180 115 Z" fill="#252A52"/>
+            <text x="120" y="134" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8892B0" opacity="0.6">vaso ou dois rostos?</text>
+          </svg>
+        </div>
+        <div class="gestalt-body">
+          <div class="gestalt-law" style="color:var(--coral)">Lei 05</div>
+          <div class="gestalt-title">Figura e Fundo</div>
+          <div class="gestalt-desc">O olho separa automaticamente o elemento principal (figura) do contexto (fundo). A ambiguidade pode ser usada como recurso.</div>
+          <div class="gestalt-apply" style="background:#FFF0EC;border-color:var(--coral);color:#C43A15">
+            No design: espaço negativo bem trabalhado cria logos e composições com duplo significado e memorabilidade.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Pregnância -->
+      <div class="gestalt-card fade-in" style="transition-delay:0.30s">
+        <div class="gestalt-visual" style="background:#F0FFF8">
+          <svg class="g-svg" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- formas simples e formas complexas -->
+            <circle cx="65" cy="70" r="32" fill="none" stroke="#06D6A0" stroke-width="3"/>
+            <rect x="113" y="38" width="64" height="64" rx="6" fill="none" stroke="#06D6A0" stroke-width="3"/>
+            <!-- vs complexo à direita apagado -->
+            <polygon points="185,38 215,95 155,95" fill="none" stroke="#06D6A0" stroke-width="3" opacity="0.35"/>
+            <text x="65"  y="125" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#8892B0">simples</text>
+            <text x="145" y="125" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#8892B0">regular</text>
+            <text x="185" y="125" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#8892B0" opacity="0.5">complexo</text>
+          </svg>
+        </div>
+        <div class="gestalt-body">
+          <div class="gestalt-law" style="color:var(--green)">Lei 06</div>
+          <div class="gestalt-title">Pregnância</div>
+          <div class="gestalt-desc">O cérebro prefere a interpretação mais simples e regular possível. Formas claras e simétricas são percebidas mais rapidamente.</div>
+          <div class="gestalt-apply" style="background:#F0FFF8;border-color:var(--green);color:#048A6A">
+            No design: simplicidade não é limitação — é poder. Ícones e logos simples são reconhecidos mais rápido e lembrados por mais tempo.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gestalt-banner fade-in" style="transition-delay:0.35s">
+      A Gestalt não é teoria abstrata — é o <span>mapa da percepção humana.</span> Quem entende como o cérebro vê, projeta para ser visto da forma certa.
+    </div>
+  </div>
+</section>
+
+<!-- ══ 13. CONCLUSÃO ══ -->
+<section class="closing-section" data-section="12">
+  <div class="closing-left fade-in">
+    <div class="section-tag" style="color:rgba(255,255,255,0.7);margin-bottom:24px">Conclusão</div>
+    <h2>Dominar os<br>fundamentos é o<br>que separa quem<br>decora de quem<br>projeta.</h2>
+    <p style="margin-top:24px">Design gráfico é a arte de tomar decisões visuais com propósito.</p>
+  </div>
+  <div class="closing-right fade-in" style="transition-delay:0.15s">
+    <h3>Os três pilares</h3>
+    <div class="closing-pillars">
+      <div class="closing-pillar">
+        <div class="closing-badge" style="background:#F4623A33">⚙️</div>
+        <div class="closing-pillar-text">
+          <strong>Fundamentos sólidos</strong>
+          <span>O design funciona — resolve o problema. Hierarquia, composição, cor e tipo a serviço da comunicação.</span>
+        </div>
+      </div>
+      <div class="closing-pillar">
+        <div class="closing-badge" style="background:#9B5DE533">💜</div>
+        <div class="closing-pillar-text">
+          <strong>Design emocional cultivado</strong>
+          <span>O design conecta — cria memória. Os três níveis de Norman transformam uma peça em experiência.</span>
+        </div>
+      </div>
+      <div class="closing-pillar">
+        <div class="closing-badge" style="background:#4ECDC433">🔗</div>
+        <div class="closing-pillar-text">
+          <strong>Sistema construído</strong>
+          <span>O design escala — sem perder coerência. Tokens, componentes, padrões e diretrizes que crescem com o time.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Nav dots
+  const sections = document.querySelectorAll('[data-section]');
+  const dots = document.querySelectorAll('.nav-dot');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = entry.target.dataset.section;
+        dots.forEach(d => d.classList.remove('active'));
+        const dot = document.querySelector(`.nav-dot[data-section="${idx}"]`);
+        if (dot) dot.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => sectionObserver.observe(s));
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = document.querySelector(`[data-section="${dot.dataset.section}"]`);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    hamburger.textContent = isOpen ? '✕' : '≡';
+  });
+</script>
+</body>
+</html>

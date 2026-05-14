@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intenção Comunicativa no Design</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #1A1E3C;
+      --navy2: #252A52;
+      --coral: #ff3700;
+      --teal: #33b7af;
+      --yellow: #af7e06;
+      --violet: #7618e9;
+      --white: #FFFFFF;
+      --light: #CCD6F6;
+      --slate: #7884a7;
+      --bg: #F4F5FA;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 64px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, #F4623A22 0%, transparent 70%);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--coral);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.05;
+      max-width: 680px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .hero h1 span {
+      color: var(--coral);
+    }
+
+    .hero p {
+      color: var(--light);
+      font-size: 17px;
+      font-weight: 300;
+      max-width: 520px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    /* ── THE QUESTION ── */
+    .question-section {
+      background: var(--coral);
+      padding: 48px;
+      text-align: center;
+    }
+
+    .question-section p {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 700;
+      color: #fff;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    .question-section p em {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75em;
+      margin-top: 12px;
+      opacity: 0.85;
+    }
+
+    /* ── INTRO TEXT ── */
+    .intro {
+      padding: 64px 48px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .intro h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 16px;
+    }
+
+    .intro p {
+      font-size: 18px;
+      line-height: 1.75;
+      color: #444;
+      max-width: 700px;
+    }
+
+    /* ── GRID CARDS ── */
+    .cards-section {
+      padding: 56px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(26, 30, 60, 0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(26, 30, 60, 0.14);
+    }
+
+    .card-top {
+      padding: 36px 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-top::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      opacity: 0.12;
+      background: currentColor;
+    }
+
+    .card-1 .card-top {
+      background: #FFF0EC;
+    }
+
+    .card-2 .card-top {
+      background: #EDFAF9;
+    }
+
+    .card-3 .card-top {
+      background: #FFFBEE;
+    }
+
+    .card-4 .card-top {
+      background: #F5EEFF;
+    }
+
+    .card-1 .card-top::after {
+      color: var(--coral);
+    }
+
+    .card-2 .card-top::after {
+      color: var(--teal);
+    }
+
+    .card-3 .card-top::after {
+      color: var(--yellow);
+    }
+
+    .card-4 .card-top::after {
+      color: var(--violet);
+    }
+
+    .card-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    .card-1 .card-number {
+      color: var(--coral);
+    }
+
+    .card-2 .card-number {
+      color: var(--teal);
+    }
+
+    .card-3 .card-number {
+      color: #B8860B;
+    }
+
+    .card-4 .card-number {
+      color: var(--violet);
+    }
+
+    .card-emoji {
+      font-size: 42px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.6;
+      color: var(--navy);
+    }
+
+    .card-body {
+      padding: 28px 32px 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card-question {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.5;
+      padding: 14px 16px;
+      border-radius: 8px;
+      background: var(--bg);
+      border-left: 3px solid;
+    }
+
+    .card-1 .card-question {
+      border-color: var(--coral);
+    }
+
+    .card-2 .card-question {
+      border-color: var(--teal);
+    }
+
+    .card-3 .card-question {
+      border-color: var(--yellow);
+    }
+
+    .card-4 .card-question {
+      border-color: var(--violet);
+    }
+
+    .card-desc {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #666;
+    }
+
+    .examples-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 10px;
+    }
+
+    .examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 1.5px solid;
+    }
+
+    .card-1 .tag {
+      border-color: #F4623A44;
+      color: #C43A15;
+      background: #FFF0EC;
+    }
+
+    .card-2 .tag {
+      border-color: #4ECDC444;
+      color: #2A9E97;
+      background: #EDFAF9;
+    }
+
+    .card-3 .tag {
+      border-color: #FFD16644;
+      color: #997700;
+      background: #FFFBEE;
+    }
+
+    .card-4 .tag {
+      border-color: #9B5DE544;
+      color: #6B2AB5;
+      background: #F5EEFF;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--slate);
+      font-weight: 500;
+    }
+
+    .metric-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--bg);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .metric-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 1s ease;
+    }
+
+    .card-1 .metric-fill {
+      background: var(--coral);
+    }
+
+    .card-2 .metric-fill {
+      background: var(--teal);
+    }
+
+    .card-3 .metric-fill {
+      background: var(--yellow);
+    }
+
+    .card-4 .metric-fill {
+      background: var(--violet);
+    }
+
+    /* ── WRONG VS RIGHT ── */
+    .compare-section {
+      background: var(--navy);
+      padding: 72px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .compare-section::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #F4623A18, transparent 70%);
+    }
+
+    .compare-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .compare-inner>h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 40px;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .compare-col {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .compare-col-header {
+      padding: 16px 24px;
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .compare-col.bad .compare-col-header {
+      background: #FF4D4D22;
+      color: #FF8080;
+    }
+
+    .compare-col.good .compare-col-header {
+      background: #4ECDC422;
+      color: var(--teal);
+    }
+
+    .compare-item {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .compare-item:last-child {
+      border-bottom: none;
+    }
+
+    .compare-col.bad .compare-item {
+      color: #ff8080;
+    }
+
+    .compare-col.good .compare-item {
+      color: #a8f0ec;
+    }
+
+    .compare-vs {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--coral);
+      text-align: center;
+    }
+
+    /* ── THE RULE ── */
+    .rule-section {
+      padding: 72px 48px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .rule-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 28px;
+    }
+
+    .rule-box {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 52px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rule-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, #F4623A18, transparent 70%);
+    }
+
+    .rule-box blockquote {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.3;
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .rule-box blockquote span {
+      color: var(--coral);
+    }
+
+    .rule-box p {
+      color: var(--light);
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 300;
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── FLOW DIAGRAM ── */
+    .flow-section {
+      padding: 72px 48px;
+      background: var(--white);
+    }
+
+    .flow-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .flow-inner>h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 12px;
+    }
+
+    .flow-inner>p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    .flow {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      flex-wrap: nowrap;
+    }
+
+    .flow-step {
+      flex: 1;
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+      min-width: 0;
+    }
+
+    .flow-step+.flow-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      color: var(--slate);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .flow-step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--coral);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      margin: 0 auto 14px;
+    }
+
+    .flow-step h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .flow-step p {
+      font-size: 13px;
+      color: var(--slate);
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy2);
+      padding: 32px 48px;
+      text-align: center;
+      color: var(--slate);
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: var(--coral);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-vs {
+        display: none;
+      }
+
+      .flow {
+        flex-direction: column;
+      }
+
+      .flow-arrow {
+        display: none !important;
+      }
+
+      .hero,
+      .question-section,
+      .intro,
+      .cards-section,
+      .compare-section,
+      .rule-section,
+      .flow-section {
+        padding: 40px 24px;
+      }
+    }
+
+  /* ── GLOBAL NAV HEADER ── */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(26, 30, 60, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 200;
+  }
+  .site-header-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .site-header-logo-mark {
+    color: var(--coral);
+    font-size: 18px;
+  }
+  .site-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .site-header-nav a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--light);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.2s;
+  }
+  .site-header-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--coral);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  .site-header-nav a:hover,
+  .site-header-nav a.active { color: var(--white); }
+  .site-header-nav a:hover::after,
+  .site-header-nav a.active::after { transform: scaleX(1); }
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  .nav-mobile {
+    display: none;
+    position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: var(--navy2, #252A52);
+    flex-direction: column;
+    padding: 8px 0;
+    z-index: 199;
+    border-bottom: 2px solid var(--coral);
+  }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: var(--light);
+    text-decoration: none;
+    padding: 14px 40px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-mobile a:hover,
+  .nav-mobile a.active {
+    background: rgba(244,98,58,0.1);
+    color: var(--white);
+  }
+  @media (max-width: 768px) {
+    .site-header { padding: 0 24px; }
+    .site-header-nav { display: none; }
+    .nav-hamburger { display: block; }
+  }
+  body { padding-top: 60px; }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="site-header-logo">
+      <span class="site-header-logo-mark">◆</span>
+      Ensino Design
+    </a>
+    <nav class="site-header-nav" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="fundamentosdodesign.html">Fundamentos</a>
+      <a href="diagnostico-time-design.html">Diagnóstico</a>
+      <a href="intencao-comunicativa.html" class="active">Intenção</a>
+    </nav>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">≡</button>
+  </header>
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Navegação mobile">
+    <a href="index.html">Início</a>
+    <a href="fundamentosdodesign.html">Fundamentos</a>
+    <a href="diagnostico-time-design.html">Diagnóstico</a>
+    <a href="intencao-comunicativa.html" class="active">Intenção</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Conceito Fundamental</div>
+    <h1>Intenção<br><span>Comunicativa</span></h1>
+    <p>Toda peça precisa responder uma pergunta antes de começar. A resposta muda tudo — o layout, a tipografia, o CTA,
+      a hierarquia.</p>
+  </section>
+
+  <!-- THE QUESTION -->
+  <div class="question-section">
+    <p>
+      "Qual o objetivo dessa peça?"
+      <em>Se você não sabe responder isso antes de começar, o resultado vai ser decorativo — não comunicativo.</em>
+    </p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro fade-in">
+    <h2>Por que isso importa</h2>
+    <p>Cada peça que produzimos tem um trabalho a fazer. Não é só estar bonita — é gerar um comportamento no público.
+      Quando definimos a intenção antes, todas as nossas escolhas de design passam a servir esse objetivo.</p>
+  </div>
+
+  <!-- CARDS -->
+  <section class="cards-section">
+    <div class="cards-grid">
+
+      <!-- INFORMAR -->
+      <div class="card card-1 fade-in">
+        <div class="card-top">
+          <div class="card-number">Intenção 01</div>
+          <span class="card-emoji">📢</span>
+          <div class="card-title">Informar</div>
+          <div class="card-subtitle">Quero que a pessoa saiba algo</div>
+        </div>
+        <div class="card-body">
+          <div class="card-question">
+            "O que eu quero que a pessoa saiba depois de ver essa peça?"
+          </div>
+          <div class="card-desc">
+            O objetivo é transmitir uma informação clara. A hierarquia visual precisa guiar o olho direto para o dado
+            mais importante. Clareza acima de tudo — se precisar explicar o post, o post falhou.
+          </div>
+          <div>
+            <div class="examples-label">Exemplos no dia a dia</div>
+            <div class="examples">
+              <span class="tag">Lançamento de produto</span>
+              <span class="tag">Horário de funcionamento</span>
+              <span class="tag">Nova funcionalidade</span>
+              <span class="tag">Dado ou estatística</span>
+            </div>
+          </div>
+          <div>
+            <div class="examples-label">Métricas de sucesso</div>
+            <div class="metric-row">
+              <span class="metric-label">Alcance</span>
+              <div class="metric-bar">
+                <div class="metric-fill" style="width:85%"></div>
+              </div>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Impressões</span>
+              <div class="metric-bar">
+                <div class="metric-fill" style="width:90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENGAJAR -->
+      <div class="card card-2 fade-in">
+        <div class="card-top">
+          <div class="card-number">Intenção 02</div>
+          <span class="card-emoji">💬</span>
+          <div class="card-title">Engajar</div>
+          <div class="card-subtitle">Quero que a pessoa interaja</div>
+        </div>
+        <div class="card-body">
+          <div class="card-question">
+            "O que eu quero que a pessoa faça ou sinta ao ver essa peça?"
+          </div>
+          <div class="card-desc">
+            O objetivo é provocar uma reação — curtida, comentário, compartilhamento, resposta nos stories. O design
+            precisa de um elemento de tensão, surpresa ou conexão emocional que force uma reação.
+          </div>
+          <div>
+            <div class="examples-label">Exemplos no dia a dia</div>
+            <div class="examples">
+              <span class="tag">Pergunta nos stories</span>
+              <span class="tag">Post de opinião</span>
+              <span class="tag">Carrossel com dica</span>
+              <span class="tag">Meme da marca</span>
+            </div>
+          </div>
+          <div>
+            <div class="examples-label">Métricas de sucesso</div>
+            <div class="metric-row">
+              <span class="metric-label">Comentários</span>
+              <div class="metric-bar">
+                <div class="metric-fill" style="width:92%"></div>
+              </div>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Compartilhamentos</span>
+              <div class="metric-bar">
+                <div class="metric-fill" style="width:78%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONVERTER -->
+      <div class="card card-3 fade-in">
+        <div class="card-top">
+          <div class="card-number">Intenção 03</div>
+          <span class="card-emoji">🎯</span>
+          <div class="card-title">Converter</div>
+          <div class="card-subtitle">Quero que a pessoa aja agora</div>
+        </div>
+        <div class="card-body">
+          <div class="card-question">
+            "Qual ação específica eu quero que a pessoa tome depois de ver essa peça?"
+          </div>
+          <div class="card-desc">
+            O objetivo é gerar uma ação concreta — clicar, comprar, cadastrar, ligar. O CTA precisa ser o elemento mais
+            visível. Toda hierarquia visual serve para chegar nele. Sem CTA claro, não é peça de conversão.
+          </div>
+          <div>
+            <div class="examples-label">Exemplos no dia a dia</div>
+            <div class="examples">
+              <span class="tag">Oferta com prazo</span>
+              <span class="tag">Email de promoção</span>
+              <span class="tag">Post de venda direta</span>
+              <span class="tag">Link na bio</span>
+            </div>
+          </div>
+          <div>
+            <div class="examples-label">Métricas de sucesso</div>
+            <div class="metric-row">
+              <span class="metric-label">Cliques</span>
+              <div class="metric-bar">
+                <div class="metric-fill" style="width:88%"></div>
+              </div>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Taxa de conversão</span>
+              <div class="metric-bar">
+                <div class="metric-fill" style="width:70%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALVAR -->
+      <div class="card card-4 fade-in">
+        <div class="card-top">
+          <div class="card-number">Intenção 04</div>
+          <span class="card-emoji">🔖</span>
+          <div class="card-title">Gerar Salvamento</div>
+          <div class="card-subtitle">Quero que a pessoa guarde para depois</div>
+        </div>
+        <div class="card-body">
+          <div class="card-question">
+            "Essa peça tem tanto valor que a pessoa vai querer revisitar ela?"
+          </div>
+          <div class="card-desc">
+            O objetivo é criar conteúdo de referência — tutoriais, listas, passo a passo, guias. A densidade de
+            informação útil precisa ser alta. O design precisa ser organizado o suficiente para ser consultado depois,
+            não apenas consumido no scroll.
+          </div>
+          <div>
+            <div class="examples-label">Exemplos no dia a dia</div>
+            <div class="examples">
+              <span class="tag">Checklist</span>
+              <span class="tag">Passo a passo</span>
+              <span class="tag">Top 5 dicas</span>
+              <span class="tag">Guia visual</span>
+            </div>
+          </div>
+          <div>
+            <div class="examples-label">Métricas de sucesso</div>
+            <div class="metric-row">
+              <span class="metric-label">Salvamentos</span>
+              <div class="metric-bar">
+                <div class="metric-fill" style="width:95%"></div>
+              </div>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Visitas ao perfil</span>
+              <div class="metric-bar">
+                <div class="metric-fill" style="width:65%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPARE WRONG VS RIGHT -->
+  <section class="compare-section">
+    <div class="compare-inner">
+      <h2>⚡ Sem intenção vs. Com intenção</h2>
+      <div class="compare-grid fade-in">
+        <div class="compare-col bad">
+          <div class="compare-col-header">❌ Sem intenção definida</div>
+          <div class="compare-item">"Fazer um post bonito sobre o produto"</div>
+          <div class="compare-item">Designer começa a criar sem direção definida</div>
+          <div class="compare-item">Layout equilibrado mas sem foco</div>
+          <div class="compare-item">Cliente pede revisão — "não ficou com a cara certa"</div>
+          <div class="compare-item">Retrabalho. Aprovação por cansaço</div>
+          <div class="compare-item">Post vai ao ar. Resultado: decorativo</div>
+        </div>
+        <div class="compare-vs">→</div>
+        <div class="compare-col good">
+          <div class="compare-col-header">✅ Com intenção definida</div>
+          <div class="compare-item">"Quero que cliquem no link — é conversão"</div>
+          <div class="compare-item">Designer sabe: CTA em destaque máximo</div>
+          <div class="compare-item">Hierarquia: oferta → benefício → CTA</div>
+          <div class="compare-item">Aprovação rápida — critério claro</div>
+          <div class="compare-item">Zero retrabalho de conceito</div>
+          <div class="compare-item">Post vai ao ar. Resultado: cliques e vendas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE RULE -->
+  <section class="rule-section fade-in">
+    <h2>A Regra de Ouro</h2>
+    <div class="rule-box">
+      <blockquote>
+        Toda peça tem <span>um trabalho a fazer.</span><br>
+        Defina esse trabalho antes de começar.
+      </blockquote>
+      <p>Quando a intenção está clara, cada decisão de design tem um critério objetivo. A tipografia serve a intenção. A
+        cor serve a intenção. O layout serve a intenção. O resultado deixa de ser decorativo e passa a ser comunicativo.
+      </p>
+    </div>
+  </section>
+
+  <!-- FLOW DIAGRAM -->
+  <section class="flow-section fade-in">
+    <div class="flow-inner">
+      <h2>O fluxo de toda peça</h2>
+      <p>Antes de qualquer execução, percorra esses passos mentalmente. Leva 2 minutos e elimina horas de retrabalho.
+      </p>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-step-num">1</div>
+          <h3>Qual é a intenção?</h3>
+          <p>Informar, engajar, converter ou gerar salvamento?</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step-num">2</div>
+          <h3>Qual é o público?</h3>
+          <p>Quem vai ver? O que eles precisam sentir ou saber?</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step-num">3</div>
+          <h3>Qual é a hierarquia?</h3>
+          <p>O que o olho lê primeiro? Isso serve a intenção?</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step-num">4</div>
+          <h3>A peça cumpriu?</h3>
+          <p>Antes de entregar — a intenção está sendo cumprida?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>Time de Design</strong> — Intenção Comunicativa é o primeiro passo para design estratégico.
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Stagger card animations
+    document.querySelectorAll('.card.fade-in').forEach((card, i) => {
+      const orig = card.style.transitionDelay || '0s';
+      card.style.transitionDelay = (i * 0.12) + 's';
+    });
+
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.textContent = isOpen ? '✕' : '≡';
+    });
+  </script>
+</body>
+
+</html>
