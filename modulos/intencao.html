@@ -5,42 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Intenção Comunicativa no Design</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --navy: #1A1E3C;
-      --navy2: #252A52;
-      --coral: #ff3700;
-      --teal: #33b7af;
-      --yellow: #af7e06;
-      --violet: #7618e9;
-      --white: #FFFFFF;
-      --light: #CCD6F6;
-      --slate: #7884a7;
-      --bg: #F4F5FA;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--navy);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
     /* ── HERO ── */
     .hero {
       background: var(--navy);
@@ -649,17 +615,6 @@
       color: var(--coral);
     }
 
-    /* ── ANIMATIONS ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
 
     @media (max-width: 720px) {
       .cards-grid {
@@ -693,102 +648,6 @@
       }
     }
 
-  /* ── GLOBAL NAV HEADER ── */
-  .site-header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 60px;
-    background: rgba(26, 30, 60, 0.95);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    z-index: 200;
-  }
-  .site-header-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--white);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .site-header-logo-mark {
-    color: var(--coral);
-    font-size: 18px;
-  }
-  .site-header-nav {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-  .site-header-nav a {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--light);
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 3px;
-    transition: color 0.2s;
-  }
-  .site-header-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--coral);
-    transform: scaleX(0);
-    transition: transform 0.2s;
-  }
-  .site-header-nav a:hover,
-  .site-header-nav a.active { color: var(--white); }
-  .site-header-nav a:hover::after,
-  .site-header-nav a.active::after { transform: scaleX(1); }
-  .nav-hamburger {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 22px;
-    cursor: pointer;
-    padding: 4px 8px;
-    line-height: 1;
-  }
-  .nav-mobile {
-    display: none;
-    position: fixed;
-    top: 60px; left: 0; right: 0;
-    background: var(--navy2, #252A52);
-    flex-direction: column;
-    padding: 8px 0;
-    z-index: 199;
-    border-bottom: 2px solid var(--coral);
-  }
-  .nav-mobile.open { display: flex; }
-  .nav-mobile a {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    color: var(--light);
-    text-decoration: none;
-    padding: 14px 40px;
-    transition: background 0.15s, color 0.15s;
-  }
-  .nav-mobile a:hover,
-  .nav-mobile a.active {
-    background: rgba(244,98,58,0.1);
-    color: var(--white);
-  }
-  @media (max-width: 768px) {
-    .site-header { padding: 0 24px; }
-    .site-header-nav { display: none; }
-    .nav-hamburger { display: block; }
-  }
-  body { padding-top: 60px; }
   </style>
 </head>
 
@@ -800,10 +659,10 @@
       Ensino Design
     </a>
     <nav class="site-header-nav" aria-label="Navegação principal">
-      <a href="index.html">Início</a>
-      <a href="diagnostico-time-design.html">Diagnóstico</a>
-      <a href="intencao-comunicativa.html" class="active">Intenção</a>
-      <a href="fundamentosdodesign.html">Fundamentos</a>
+      <a href="../index.html">Início</a>
+      <a href="diagnostico.html">Diagnóstico</a>
+      <a href="intencao.html" class="active">Intenção</a>
+      <a href="fundamentos.html">Fundamentos</a>
     </nav>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">≡</button>
   </header>
